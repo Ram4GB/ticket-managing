@@ -36,6 +36,14 @@ const Tickets: FC<Props> = (props) => {
       bordered
       columns={[
         {
+          title: 'ID',
+          dataIndex: 'id',
+          align: 'center',
+          render(value) {
+            return <AppLink to={`/ticket/${value}`}>{value}</AppLink>;
+          },
+        },
+        {
           title: 'Description',
           dataIndex: 'description',
           render(value, row) {
