@@ -2,6 +2,7 @@ import { Button, Flex, Form, Modal, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../libs/store';
 import { fetchUserList } from '../../store/user/actions';
+import UserDescriptionWrapper from './user-description-wrapper';
 
 interface Props {
   open: boolean;
@@ -28,7 +29,13 @@ const UserModal: FC<Props> = ({ open, onSubmit, onCancel }) => {
 
   return (
     <Modal onCancel={onCancel} footer={null} open={open} title="Choose user">
-      <Form form={form} initialValues={{ user: '' }} onFinish={onSubmit}>
+      <UserDescriptionWrapper form={form} />
+      <Form
+        style={{ marginTop: 20 }}
+        form={form}
+        initialValues={{ user: '' }}
+        onFinish={onSubmit}
+      >
         <Form.Item
           rules={[
             {
