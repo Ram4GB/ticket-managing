@@ -32,6 +32,7 @@ const Tickets: FC<Props> = (props) => {
 
   return (
     <Table
+      scroll={{ x: 800 }}
       loading={loading}
       bordered
       columns={[

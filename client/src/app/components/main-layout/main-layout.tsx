@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();

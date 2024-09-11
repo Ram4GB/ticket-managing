@@ -26,7 +26,13 @@ const TicketList = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <Flex style={{ marginBottom: 10 }} align="center" justify="space-between">
+      <Heading>Ticket list</Heading>
+      <Flex
+        style={{ marginBottom: 20 }}
+        align="center"
+        justify="space-between"
+        wrap="wrap"
+      >
         <FilterStatus value={filter.status} onChange={handleChangeStatus} />
         <div style={{ marginLeft: 'auto' }}>
           <Button
@@ -39,7 +45,6 @@ const TicketList = () => {
           </Button>
         </div>
       </Flex>
-      <Heading>Ticket list</Heading>
       <Tickets
         loading={loading}
         tickets={list}
