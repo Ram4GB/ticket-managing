@@ -1,15 +1,24 @@
 import { Ticket } from '@acme/shared-models';
-import { Button, Flex, Table, Tooltip } from 'antd';
+import { Button, Flex, Popconfirm, Table, Tooltip } from 'antd';
 import Badge from '../badge/badge';
-import { CheckCircleOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CheckCircleOutlined,
+  UserOutlined,
+  UserAddOutlined,
+  UserDeleteOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
-export interface TicketsProps {
+export interface Props {
   tickets: Ticket[];
+  handleClickAssign?: (ticket: Ticket) => void;
+  handleClickUnassign?: (ticket: Ticket) => void;
 }
 
-export function Tickets(props: TicketsProps) {
-  const { tickets } = props;
+const Tickets: FC<Props> = (props) => {
+  const { tickets, handleClickAssign, handleClickUnassign } = props;
 
   return (
     <Table
@@ -45,12 +54,41 @@ export function Tickets(props: TicketsProps) {
         },
         {
           title: 'Actions',
-          render() {
+          render(_, row) {
             return (
               <Flex gap={8}>
-                <Button type="dashed">Assign</Button>
-                <Button icon={<CheckCircleOutlined />} type="primary">
-                  Complete
+                {row.assigneeId ? (
+                  <Popconfirm
+                    title="Unassign ticket"
+                    description="Are you sure to un-assign this ticket?"
+                    onConfirm={() => handleClickUnassign?.(row)}
+                  >
+                    <Button
+                      type="dashed"
+                      icon={<UserDeleteOutlined />}
+                      style={{ minWidth: 120 }}
+                    >
+                      Unassign
+                    </Button>
+                  </Popconfirm>
+                ) : (
+                  <Button
+                    type="dashed"
+                    icon={<UserAddOutlined />}
+                    style={{ minWidth: 120 }}
+                    onClick={() => handleClickAssign?.(row)}
+                  >
+                    Assign
+                  </Button>
+                )}
+                <Button
+                  style={{ minWidth: 120 }}
+                  icon={
+                    row.completed ? <CloseOutlined /> : <CheckCircleOutlined />
+                  }
+                  type="primary"
+                >
+                  {row.completed ? 'Uncomplete' : 'Complete'}
                 </Button>
               </Flex>
             );
@@ -61,6 +99,6 @@ export function Tickets(props: TicketsProps) {
       rowKey={(row) => row.id}
     />
   );
-}
+};
 
 export default Tickets;

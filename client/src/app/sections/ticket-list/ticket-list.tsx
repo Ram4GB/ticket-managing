@@ -3,25 +3,21 @@ import Heading from '../../components/heading/heading';
 import Tickets from '../../components/tickets/tickets';
 
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { useAppDispatch, useAppSelector } from '../../libs/store';
-import { useEffect } from 'react';
-import { fetchTicketList } from '../../store/ticket/actions';
-import { useNavigate } from 'react-router-dom';
+
+import UserModal from '../../components/user-modal/user-modal';
+import useTicketList from './hooks/useTicketList';
 
 const TicketList = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const list = useAppSelector((state) => state.ticket.tickets);
-
-  const handleChangeStatus = (value: string) => {
-    console.log('value', value);
-  };
-
-  useEffect(() => {
-    dispatch(fetchTicketList());
-  }, [dispatch]);
-
-  console.log('list', list);
+  const {
+    list,
+    selectedTicket,
+    handleAddNewTicket,
+    handleAssign,
+    handleChangeStatus,
+    setSelectedTicket,
+    handleCloseModal,
+    handleUnassign,
+  } = useTicketList();
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -41,7 +37,7 @@ const TicketList = () => {
         </div>
         <div style={{ marginLeft: 'auto' }}>
           <Button
-            onClick={() => navigate('/ticket/new')}
+            onClick={handleAddNewTicket}
             size="large"
             type="primary"
             icon={<PlusCircleOutlined />}
@@ -51,7 +47,16 @@ const TicketList = () => {
         </div>
       </Flex>
       <Heading>Ticket list</Heading>
-      <Tickets tickets={list} />
+      <Tickets
+        tickets={list}
+        handleClickAssign={(ticket) => setSelectedTicket(ticket)}
+        handleClickUnassign={handleUnassign}
+      />
+      <UserModal
+        open={Boolean(selectedTicket)}
+        onSubmit={handleAssign}
+        onCancel={handleCloseModal}
+      />
     </div>
   );
 };

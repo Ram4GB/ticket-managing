@@ -85,3 +85,52 @@ export const createNewTicket = (
     }
   };
 };
+
+export const assignTicket = (
+  userId: number,
+  ticketId: number
+): AppThunk<Promise<boolean>> => {
+  return async (dispatch) => {
+    try {
+      dispatch(setLoadingTicketItem(true));
+      const result = await instance.put(
+        `/tickets/${ticketId}/assign/${userId}`
+      );
+      if (result.status !== 204) {
+        // handle error
+      }
+
+      dispatch(fetchTicketList());
+
+      return true;
+    } catch (error) {
+      // handle error
+      return false;
+    } finally {
+      dispatch(setLoadingTicketItem(false));
+    }
+  };
+};
+
+export const unassignTicket = (
+  ticketId: number
+): AppThunk<Promise<boolean>> => {
+  return async (dispatch) => {
+    try {
+      dispatch(setLoadingTicketItem(true));
+      const result = await instance.put(`/tickets/${ticketId}/unassign`);
+      if (result.status !== 204) {
+        // handle error
+      }
+
+      dispatch(fetchTicketList());
+
+      return true;
+    } catch (error) {
+      // handle error
+      return false;
+    } finally {
+      dispatch(setLoadingTicketItem(false));
+    }
+  };
+};
