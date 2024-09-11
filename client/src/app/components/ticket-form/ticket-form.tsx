@@ -33,6 +33,12 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
     onSubmit?.({ description: values.description ?? '' });
   };
 
+  const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (
+    errorInfo
+  ) => {
+    console.log('errorInfo', errorInfo);
+  };
+
   useEffect(() => {
     dispatch(fetchUserList());
   }, [dispatch]);
@@ -43,6 +49,7 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
       initialValues={{ description: '' }}
       autoComplete="off"
       onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
     >
       <Form.Item
         label="Description"
@@ -85,7 +92,6 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
         <Button
           icon={<CloseOutlined />}
           size="large"
-          htmlType="submit"
           type="dashed"
           onClick={handleCancel}
           disabled={loadinngTicketItem}

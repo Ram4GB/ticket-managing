@@ -17,10 +17,11 @@ const useTicketList = () => {
   const list = useAppSelector((state) => state.ticket.tickets);
 
   const [selectedTicket, setSelectedTicket] = useState<Ticket>();
-
-  const handleChangeStatus = (value: string) => {
-    console.log('value', value);
-  };
+  const [filter, setFilter] = useState<{
+    status: 'All' | 'Completed' | 'Incompleted';
+  }>({
+    status: 'All',
+  });
 
   const handleAddNewTicket = () => {
     navigate('/ticket/new');
@@ -77,8 +78,30 @@ const useTicketList = () => {
     setSelectedTicket(undefined);
   };
 
+  const handleChangeStatus = (status: 'Completed' | 'Incompleted' | 'All') => {
+    setFilter({
+      ...filter,
+      status,
+    });
+  };
+
+  const getListByStatus = (
+    list: Ticket[],
+    status: 'Completed' | 'Incompleted'
+  ) => {
+    if (status === 'Completed') {
+      return list.filter((item) => item.completed);
+    }
+
+    return list.filter((item) => !item.completed);
+  };
+
+  const filteredList =
+    filter.status === 'All' ? list : getListByStatus(list, filter.status);
+
   return {
-    list,
+    list: filteredList,
+    filter,
     selectedTicket,
     handleUnassign,
     handleAssign,

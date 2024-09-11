@@ -10,15 +10,16 @@ import useTicketList from './hooks/useTicketList';
 const TicketList = () => {
   const {
     list,
+    filter,
     selectedTicket,
     handleAddNewTicket,
     handleAssign,
-    handleChangeStatus,
     setSelectedTicket,
     handleCloseModal,
     handleUnassign,
     handleCompleteTicket,
     handleUncompleteTicket,
+    handleChangeStatus,
   } = useTicketList();
 
   return (
@@ -26,7 +27,7 @@ const TicketList = () => {
       <Flex style={{ marginBottom: 10 }} align="center" justify="space-between">
         <div>
           <Select
-            value={'All'}
+            value={filter.status}
             size="large"
             style={{ minWidth: '300px' }}
             onChange={handleChangeStatus}
