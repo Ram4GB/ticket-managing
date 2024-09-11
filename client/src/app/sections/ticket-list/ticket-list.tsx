@@ -17,6 +17,8 @@ const TicketList = () => {
     setSelectedTicket,
     handleCloseModal,
     handleUnassign,
+    handleCompleteTicket,
+    handleUncompleteTicket,
   } = useTicketList();
 
   return (
@@ -51,6 +53,8 @@ const TicketList = () => {
         tickets={list}
         handleClickAssign={(ticket) => setSelectedTicket(ticket)}
         handleClickUnassign={handleUnassign}
+        handleClickComplete={handleCompleteTicket}
+        handleClickUncomplete={handleUncompleteTicket}
       />
       <UserModal
         open={Boolean(selectedTicket)}

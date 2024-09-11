@@ -2,6 +2,7 @@ import { Ticket } from '@acme/shared-models';
 import instance from '../../libs/axios';
 import { AppThunk } from '../../libs/store';
 import createAction from '../createAction';
+import { setGlobalLoading } from '../global/actions';
 
 export const SET_TICKET_LIST = 'SET_TICKET_LIST';
 export const SET_LOADING_LIST = 'SET_LOADING_LIST';
@@ -131,6 +132,52 @@ export const unassignTicket = (
       return false;
     } finally {
       dispatch(setLoadingTicketItem(false));
+    }
+  };
+};
+
+export const completeTicket = (
+  ticketId: number
+): AppThunk<Promise<boolean>> => {
+  return async (dispatch) => {
+    try {
+      dispatch(setGlobalLoading(true));
+      const result = await instance.put(`/tickets/${ticketId}/complete`);
+      if (result.status !== 204) {
+        // handle error
+      }
+
+      dispatch(fetchTicketList());
+
+      return true;
+    } catch (error) {
+      // handle error
+      return false;
+    } finally {
+      dispatch(setGlobalLoading(false));
+    }
+  };
+};
+
+export const uncompleteTicket = (
+  ticketId: number
+): AppThunk<Promise<boolean>> => {
+  return async (dispatch) => {
+    try {
+      dispatch(setGlobalLoading(true));
+      const result = await instance.delete(`/tickets/${ticketId}/complete`);
+      if (result.status !== 204) {
+        // handle error
+      }
+
+      dispatch(fetchTicketList());
+
+      return true;
+    } catch (error) {
+      // handle error
+      return false;
+    } finally {
+      dispatch(setGlobalLoading(false));
     }
   };
 };

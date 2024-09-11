@@ -19,7 +19,7 @@ const UserModal: FC<Props> = ({ open, onSubmit, onCancel }) => {
   }, [dispatch]);
 
   return (
-    <Modal onClose={onCancel} footer={null} open={open} title="Choose user">
+    <Modal onCancel={onCancel} footer={null} open={open} title="Choose user">
       <Form onFinish={onSubmit}>
         <Form.Item
           rules={[

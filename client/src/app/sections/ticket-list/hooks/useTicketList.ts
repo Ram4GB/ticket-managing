@@ -4,8 +4,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   assignTicket,
+  completeTicket,
   fetchTicketList,
   unassignTicket,
+  uncompleteTicket,
 } from '../../../store/ticket/actions';
 import { notification } from 'antd';
 
@@ -51,6 +53,26 @@ const useTicketList = () => {
     });
   };
 
+  const handleCompleteTicket = (ticket: Ticket) => {
+    return dispatch(completeTicket(ticket?.id)).then((success) => {
+      if (success) {
+        notification.success({
+          message: `Complete ticket successfully`,
+        });
+      }
+    });
+  };
+
+  const handleUncompleteTicket = (ticket: Ticket) => {
+    return dispatch(uncompleteTicket(ticket?.id)).then((success) => {
+      if (success) {
+        notification.success({
+          message: `Uncomplete ticket successfully`,
+        });
+      }
+    });
+  };
+
   const handleCloseModal = () => {
     setSelectedTicket(undefined);
   };
@@ -64,6 +86,8 @@ const useTicketList = () => {
     handleChangeStatus,
     setSelectedTicket,
     handleCloseModal,
+    handleCompleteTicket,
+    handleUncompleteTicket,
   };
 };
 

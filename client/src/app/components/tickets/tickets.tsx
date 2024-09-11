@@ -15,10 +15,18 @@ export interface Props {
   tickets: Ticket[];
   handleClickAssign?: (ticket: Ticket) => void;
   handleClickUnassign?: (ticket: Ticket) => void;
+  handleClickComplete?: (ticket: Ticket) => void;
+  handleClickUncomplete?: (ticket: Ticket) => void;
 }
 
 const Tickets: FC<Props> = (props) => {
-  const { tickets, handleClickAssign, handleClickUnassign } = props;
+  const {
+    tickets,
+    handleClickAssign,
+    handleClickUnassign,
+    handleClickComplete,
+    handleClickUncomplete,
+  } = props;
 
   return (
     <Table
@@ -82,11 +90,17 @@ const Tickets: FC<Props> = (props) => {
                   </Button>
                 )}
                 <Button
-                  style={{ minWidth: 120 }}
+                  style={{ minWidth: 160 }}
                   icon={
                     row.completed ? <CloseOutlined /> : <CheckCircleOutlined />
                   }
                   type="primary"
+                  danger={row.completed}
+                  onClick={
+                    row.completed
+                      ? () => handleClickUncomplete?.(row)
+                      : () => handleClickComplete?.(row)
+                  }
                 >
                   {row.completed ? 'Uncomplete' : 'Complete'}
                 </Button>

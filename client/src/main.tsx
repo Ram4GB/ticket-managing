@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
 import store from './app/libs/store';
+import FullPageLoading from './app/components/fullpage-loading/fullpage-loading';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +16,8 @@ root.render(
     <ConfigProvider theme={{ token: { colorPrimary: '#00b96b' } }}>
       <BrowserRouter>
         <App />
-      </BrowserRouter>{' '}
+      </BrowserRouter>
     </ConfigProvider>
+    <FullPageLoading />
   </Provider>
 );

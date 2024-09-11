@@ -1,4 +1,10 @@
 import {
+  TypedUseSelectorHook,
+  useDispatch,
+  useSelector,
+  useStore,
+} from 'react-redux';
+import {
   Action,
   applyMiddleware,
   combineReducers,
@@ -16,15 +22,14 @@ import {
   default as userReducer,
 } from '../store/user/reducer';
 import {
-  TypedUseSelectorHook,
-  useDispatch,
-  useSelector,
-  useStore,
-} from 'react-redux';
+  MODULE_NAME as MODULE_GLOBAL,
+  default as globalReducer,
+} from '../store/global/reducer';
 
 const rootReducer = combineReducers({
   [MODULE_TICKET]: ticketReducer,
   [MODULE_USER]: userReducer,
+  [MODULE_GLOBAL]: globalReducer,
 });
 
 const composeEnhancers =
