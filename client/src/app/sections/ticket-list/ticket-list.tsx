@@ -1,4 +1,4 @@
-import { Button, Flex, Select } from 'antd';
+import { Button, Flex } from 'antd';
 import Heading from '../../components/heading/heading';
 import Tickets from '../../components/tickets/tickets';
 
@@ -6,6 +6,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 
 import UserModal from '../../components/user-modal/user-modal';
 import useTicketList from './hooks/useTicketList';
+import FilterStatus from '../../components/filter-status/filter-status';
 
 const TicketList = () => {
   const {
@@ -25,19 +26,7 @@ const TicketList = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Flex style={{ marginBottom: 10 }} align="center" justify="space-between">
-        <div>
-          <Select
-            value={filter.status}
-            size="large"
-            style={{ minWidth: '300px' }}
-            onChange={handleChangeStatus}
-            options={[
-              { value: 'All', label: <span>All</span> },
-              { value: 'Completed', label: <span>Completed</span> },
-              { value: 'Incomplete', label: <span>Incomplete</span> },
-            ]}
-          />
-        </div>
+        <FilterStatus value={filter.status} onChange={handleChangeStatus} />
         <div style={{ marginLeft: 'auto' }}>
           <Button
             onClick={handleAddNewTicket}

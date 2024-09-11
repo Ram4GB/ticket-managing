@@ -1,7 +1,9 @@
 import { Ticket } from '@acme/shared-models';
-import { useAppDispatch, useAppSelector } from '../../../libs/store';
-import { useState, useEffect } from 'react';
+import { notification } from 'antd';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Status } from '../../../const/status';
+import { useAppDispatch, useAppSelector } from '../../../libs/store';
 import {
   assignTicket,
   completeTicket,
@@ -9,7 +11,6 @@ import {
   unassignTicket,
   uncompleteTicket,
 } from '../../../store/ticket/actions';
-import { notification } from 'antd';
 
 const useTicketList = () => {
   const dispatch = useAppDispatch();
@@ -18,9 +19,9 @@ const useTicketList = () => {
 
   const [selectedTicket, setSelectedTicket] = useState<Ticket>();
   const [filter, setFilter] = useState<{
-    status: 'All' | 'Completed' | 'Incompleted';
+    status: Status;
   }>({
-    status: 'All',
+    status: Status['All'],
   });
 
   const handleAddNewTicket = () => {
@@ -78,18 +79,15 @@ const useTicketList = () => {
     setSelectedTicket(undefined);
   };
 
-  const handleChangeStatus = (status: 'Completed' | 'Incompleted' | 'All') => {
+  const handleChangeStatus = (status: Status) => {
     setFilter({
       ...filter,
       status,
     });
   };
 
-  const getListByStatus = (
-    list: Ticket[],
-    status: 'Completed' | 'Incompleted'
-  ) => {
-    if (status === 'Completed') {
+  const getListByStatus = (list: Ticket[], status: Status) => {
+    if (status === Status['Completed']) {
       return list.filter((item) => item.completed);
     }
 
@@ -97,7 +95,9 @@ const useTicketList = () => {
   };
 
   const filteredList =
-    filter.status === 'All' ? list : getListByStatus(list, filter.status);
+    filter.status === Status['All']
+      ? list
+      : getListByStatus(list, filter.status);
 
   return {
     list: filteredList,
