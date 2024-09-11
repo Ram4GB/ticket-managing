@@ -194,7 +194,7 @@ export const getTicketDetail = (
     try {
       dispatch(setGlobalLoading(true));
       const result = await instance.get(ENDPOINT.ticketDetail(ticketId));
-      if (result.status !== 204) {
+      if (result.status !== 200) {
         handleError(result.data);
       }
       dispatch(setTicketItem(result.data));
