@@ -1,10 +1,10 @@
-import { Layout, Menu, Button, theme } from 'antd';
+import { Button, Layout, Menu, theme } from 'antd';
 import { FC, PropsWithChildren, useState } from 'react';
 
 import {
+  IdcardOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  IdcardOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 

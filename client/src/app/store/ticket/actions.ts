@@ -1,9 +1,9 @@
 import { Ticket } from '@acme/shared-models';
+import ENDPOINT from '../../const/endpoint';
 import instance from '../../libs/axios';
 import { AppThunk } from '../../libs/store';
 import createAction from '../createAction';
 import { setGlobalLoading } from '../global/actions';
-import ENDPOINT from '../../const/endpoint';
 
 export const SET_TICKET_LIST = 'SET_TICKET_LIST';
 export const SET_LOADING_LIST = 'SET_LOADING_LIST';
@@ -73,7 +73,6 @@ export const createNewTicket = (
     try {
       dispatch(setLoadingTicketItem(true));
       const result = await instance.post(ENDPOINT.ticketList(), ticket);
-      console.log('result', result);
       if (result.status !== 201) {
         // handle error
       }

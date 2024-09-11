@@ -1,7 +1,7 @@
-import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { useAppSelector } from '../../libs/store';
+import { Spin } from 'antd';
 import { FC } from 'react';
+import { useAppSelector } from '../../libs/store';
 
 const FullPageLoading: FC = () => {
   const loading = useAppSelector((state) => state.global.loading);

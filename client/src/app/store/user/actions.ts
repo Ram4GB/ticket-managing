@@ -1,8 +1,8 @@
-import createAction from '../createAction';
-import { AppThunk } from '../../libs/store';
-import instance from '../../libs/axios';
 import { User } from '@acme/shared-models';
 import ENDPOINT from '../../const/endpoint';
+import instance from '../../libs/axios';
+import { AppThunk } from '../../libs/store';
+import createAction from '../createAction';
 
 export const SET_USER_LIST = 'SET_USER_LIST';
 export const SET_LOADING_LIST_USER = 'SET_LOADING_LIST_USER';

@@ -1,15 +1,15 @@
 import { Ticket } from '@acme/shared-models';
-import { Button, Flex, Popconfirm, Table, Tooltip } from 'antd';
-import Badge from '../badge/badge';
 import {
   CheckCircleOutlined,
-  UserOutlined,
+  CloseOutlined,
   UserAddOutlined,
   UserDeleteOutlined,
-  CloseOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Button, Flex, Popconfirm, Table, Tooltip } from 'antd';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import Badge from '../badge/badge';
 
 export interface Props {
   tickets: Ticket[];
@@ -48,7 +48,7 @@ const Tickets: FC<Props> = (props) => {
                 <UserOutlined />
               </Tooltip>
             ) : (
-              'N/A'
+              '---'
             );
           },
         },
@@ -75,6 +75,7 @@ const Tickets: FC<Props> = (props) => {
                       type="dashed"
                       icon={<UserDeleteOutlined />}
                       style={{ minWidth: 120 }}
+                      danger={!!row.assigneeId}
                     >
                       Unassign
                     </Button>

@@ -14,13 +14,21 @@ const UserModal: FC<Props> = ({ open, onSubmit, onCancel }) => {
   const assignees = useAppSelector((state) => state.user.users);
   const loading = useAppSelector((state) => state.ticket.ticket.loading);
 
+  const [form] = Form.useForm();
+
   useEffect(() => {
     dispatch(fetchUserList());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!open) {
+      form.resetFields();
+    }
+  }, [open, form]);
+
   return (
     <Modal onCancel={onCancel} footer={null} open={open} title="Choose user">
-      <Form onFinish={onSubmit}>
+      <Form form={form} initialValues={{ user: '' }} onFinish={onSubmit}>
         <Form.Item
           rules={[
             {
