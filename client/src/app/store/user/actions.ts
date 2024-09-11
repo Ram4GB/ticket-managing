@@ -2,6 +2,7 @@ import createAction from '../createAction';
 import { AppThunk } from '../../libs/store';
 import instance from '../../libs/axios';
 import { User } from '@acme/shared-models';
+import ENDPOINT from '../../const/endpoint';
 
 export const SET_USER_LIST = 'SET_USER_LIST';
 export const SET_LOADING_LIST_USER = 'SET_LOADING_LIST_USER';
@@ -26,7 +27,7 @@ export const fetchUserList = (): AppThunk => {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const result = await instance.get('/users');
+      const result = await instance.get(ENDPOINT.userList());
       if (result.status !== 200) {
         // handle error
       }

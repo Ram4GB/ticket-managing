@@ -3,6 +3,7 @@ import instance from '../../libs/axios';
 import { AppThunk } from '../../libs/store';
 import createAction from '../createAction';
 import { setGlobalLoading } from '../global/actions';
+import ENDPOINT from '../../const/endpoint';
 
 export const SET_TICKET_LIST = 'SET_TICKET_LIST';
 export const SET_LOADING_LIST = 'SET_LOADING_LIST';
@@ -52,7 +53,7 @@ export const fetchTicketList = (query?: {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
-      const result = await instance.get('/tickets');
+      const result = await instance.get(ENDPOINT.ticketList());
       if (result.status !== 200) {
         // handle error
       }
@@ -71,7 +72,7 @@ export const createNewTicket = (
   return async (dispatch) => {
     try {
       dispatch(setLoadingTicketItem(true));
-      const result = await instance.post('/tickets', ticket);
+      const result = await instance.post(ENDPOINT.ticketList(), ticket);
       console.log('result', result);
       if (result.status !== 201) {
         // handle error
@@ -95,7 +96,7 @@ export const assignTicket = (
     try {
       dispatch(setLoadingTicketItem(true));
       const result = await instance.put(
-        `/tickets/${ticketId}/assign/${userId}`
+        ENDPOINT.assignTicket(ticketId, userId)
       );
       if (result.status !== 204) {
         // handle error
@@ -119,7 +120,7 @@ export const unassignTicket = (
   return async (dispatch) => {
     try {
       dispatch(setLoadingTicketItem(true));
-      const result = await instance.put(`/tickets/${ticketId}/unassign`);
+      const result = await instance.put(ENDPOINT.unassignTicket(ticketId));
       if (result.status !== 204) {
         // handle error
       }
@@ -142,7 +143,9 @@ export const completeTicket = (
   return async (dispatch) => {
     try {
       dispatch(setGlobalLoading(true));
-      const result = await instance.put(`/tickets/${ticketId}/complete`);
+      const result = await instance.put(
+        ENDPOINT.updateCompleteTicket(ticketId)
+      );
       if (result.status !== 204) {
         // handle error
       }
@@ -165,7 +168,9 @@ export const uncompleteTicket = (
   return async (dispatch) => {
     try {
       dispatch(setGlobalLoading(true));
-      const result = await instance.delete(`/tickets/${ticketId}/complete`);
+      const result = await instance.delete(
+        ENDPOINT.updateCompleteTicket(ticketId)
+      );
       if (result.status !== 204) {
         // handle error
       }
