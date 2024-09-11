@@ -12,6 +12,7 @@ import Badge from '../badge/badge';
 import AppLink from '../link/link';
 
 export interface Props {
+  loading?: boolean;
   tickets: Ticket[];
   handleClickAssign?: (ticket: Ticket) => void;
   handleClickUnassign?: (ticket: Ticket) => void;
@@ -21,6 +22,7 @@ export interface Props {
 
 const Tickets: FC<Props> = (props) => {
   const {
+    loading,
     tickets,
     handleClickAssign,
     handleClickUnassign,
@@ -30,6 +32,7 @@ const Tickets: FC<Props> = (props) => {
 
   return (
     <Table
+      loading={loading}
       bordered
       columns={[
         {

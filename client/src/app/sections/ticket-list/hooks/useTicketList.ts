@@ -16,6 +16,7 @@ const useTicketList = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const list = useAppSelector((state) => state.ticket.tickets);
+  const loading = useAppSelector((state) => state.ticket.loading);
 
   const [selectedTicket, setSelectedTicket] = useState<Ticket>();
   const [filter, setFilter] = useState<{
@@ -100,6 +101,7 @@ const useTicketList = () => {
       : getListByStatus(list, filter.status);
 
   return {
+    loading,
     list: filteredList,
     filter,
     selectedTicket,

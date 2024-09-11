@@ -11,6 +11,7 @@ import FilterStatus from '../../components/filter-status/filter-status';
 const TicketList = () => {
   const {
     list,
+    loading,
     filter,
     selectedTicket,
     handleAddNewTicket,
@@ -40,6 +41,7 @@ const TicketList = () => {
       </Flex>
       <Heading>Ticket list</Heading>
       <Tickets
+        loading={loading}
         tickets={list}
         handleClickAssign={(ticket) => setSelectedTicket(ticket)}
         handleClickUnassign={handleUnassign}

@@ -18,7 +18,7 @@ export interface SetTicketList {
 
 export interface SetLoadingList {
   type: typeof SET_LOADING_LIST;
-  payload: Ticket[];
+  payload: boolean;
 }
 
 export interface SetLoadingTicketItem {
