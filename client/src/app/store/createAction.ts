@@ -1,4 +1,4 @@
-const createAction = <T>(type: any) => {
+const createAction = <T>(type: string) => {
   return (payload: T) => {
     return {
       type,
