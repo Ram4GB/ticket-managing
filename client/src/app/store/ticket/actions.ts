@@ -185,3 +185,24 @@ export const uncompleteTicket = (
     }
   };
 };
+
+export const getTicketDetail = (
+  ticketId: string
+): AppThunk<Promise<boolean>> => {
+  return async (dispatch) => {
+    try {
+      dispatch(setGlobalLoading(true));
+      const result = await instance.get(ENDPOINT.ticketDetail(ticketId));
+      if (result.status !== 204) {
+        // handle error
+      }
+      dispatch(setTicketItem(result.data));
+      return true;
+    } catch (error) {
+      // handle error
+      return false;
+    } finally {
+      dispatch(setGlobalLoading(false));
+    }
+  };
+};

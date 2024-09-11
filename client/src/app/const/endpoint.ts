@@ -5,6 +5,7 @@ const ENDPOINT = {
   unassignTicket: (ticketId: number) => `/tickets/${ticketId}/unassign`,
   updateCompleteTicket: (ticketId: number) => `/tickets/${ticketId}/complete`,
   userList: () => '/users',
+  ticketDetail: (id: string) => `/tickets/${id}`,
 };
 
 export default ENDPOINT;

@@ -5,9 +5,17 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../libs/store';
 import { fetchUserList } from '../../store/user/actions';
 
+export enum FormType {
+  'NEW' = 'NEW',
+  'EDIT' = 'EDIT',
+  'DETAIL' = 'DETAIL',
+}
+
 interface Props {
   onSubmit?: (values: { description: string }) => void;
-  type?: 'new';
+  type?: FormType;
+  initialValues?: { description: string; user: number; completed: boolean };
+  hideSubmit?: boolean;
 }
 
 type FieldType = {
@@ -16,7 +24,12 @@ type FieldType = {
   status?: string;
 };
 
-const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
+const TicketForm: FC<Props> = ({
+  type = FormType.NEW,
+  initialValues,
+  hideSubmit,
+  onSubmit,
+}) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const loadingUserList = useAppSelector((state) => state.user.loading);
@@ -46,7 +59,7 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
   return (
     <Form
       layout="vertical"
-      initialValues={{ description: '' }}
+      initialValues={initialValues ? initialValues : { description: '' }}
       autoComplete="off"
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
@@ -56,12 +69,13 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
         name="description"
         rules={[{ required: true, message: 'Please enter a description' }]}
       >
-        <Input size="large" />
+        <Input size="large" readOnly={type === FormType.DETAIL} />
       </Form.Item>
-      {type !== 'new' && (
-        <Form.Item label="Assignee" name="assignee">
+      {type !== FormType.NEW && (
+        <Form.Item label="Assignee" name="user">
           <Select
             showSearch
+            disabled={type === FormType.DETAIL}
             loading={loadingUserList}
             size="large"
             options={users.map((item) => ({
@@ -71,18 +85,19 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
           />
         </Form.Item>
       )}
-      {type !== 'new' && (
-        <Form.Item label="Status" name="status">
+      {type !== FormType.NEW && (
+        <Form.Item label="Status" name="completed">
           <Select
+            disabled={type === FormType.DETAIL}
             size="large"
             options={[
               {
                 label: 'Completed',
-                value: '1',
+                value: true,
               },
               {
                 label: 'Incomplete',
-                value: '0',
+                value: false,
               },
             ]}
           />
@@ -92,21 +107,24 @@ const TicketForm: FC<Props> = ({ type = 'new', onSubmit }) => {
         <Button
           icon={<CloseOutlined />}
           size="large"
-          type="dashed"
+          type={type === FormType.DETAIL ? 'primary' : 'dashed'}
           onClick={handleCancel}
           disabled={loadinngTicketItem}
+          style={{ width: hideSubmit ? '100%' : 'auto' }}
         >
-          Cancel
+          {type === FormType.DETAIL ? 'Back' : 'Cancel'}
         </Button>
-        <Button
-          icon={<SendOutlined />}
-          size="large"
-          htmlType="submit"
-          type="primary"
-          loading={loadinngTicketItem}
-        >
-          Submit
-        </Button>
+        {!hideSubmit && (
+          <Button
+            icon={<SendOutlined />}
+            size="large"
+            htmlType="submit"
+            type="primary"
+            loading={loadinngTicketItem}
+          >
+            Submit
+          </Button>
+        )}
       </Flex>
     </Form>
   );

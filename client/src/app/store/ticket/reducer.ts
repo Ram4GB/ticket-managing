@@ -3,6 +3,7 @@ import {
   Action,
   SET_LOADING_LIST,
   SET_LOADING_TICKET_ITEM,
+  SET_TICKET_ITEM,
   SET_TICKET_LIST,
 } from './actions';
 
@@ -44,6 +45,14 @@ const reducer = (state = initialState, action: Action) => {
         ticket: {
           ...state.ticket,
           loading: action.payload,
+        },
+      };
+    case SET_TICKET_ITEM:
+      return {
+        ...state,
+        ticket: {
+          ...state.ticket,
+          data: action.payload,
         },
       };
     default:
