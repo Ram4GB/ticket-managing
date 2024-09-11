@@ -3,6 +3,7 @@ import ENDPOINT from '../../const/endpoint';
 import instance from '../../libs/axios';
 import { AppThunk } from '../../libs/store';
 import createAction from '../createAction';
+import handleError from '../../utils/handle-error';
 
 export const SET_USER_LIST = 'SET_USER_LIST';
 export const SET_LOADING_LIST_USER = 'SET_LOADING_LIST_USER';
@@ -29,11 +30,11 @@ export const fetchUserList = (): AppThunk => {
       dispatch(setLoading(true));
       const result = await instance.get(ENDPOINT.userList());
       if (result.status !== 200) {
-        // handle error
+        handleError(result.data);
       }
       dispatch(setUserList(result.data));
     } catch (error) {
-      // handle error
+      handleError(error);
     } finally {
       dispatch(setLoading(false));
     }

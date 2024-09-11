@@ -4,6 +4,7 @@ import instance from '../../libs/axios';
 import { AppThunk } from '../../libs/store';
 import createAction from '../createAction';
 import { setGlobalLoading } from '../global/actions';
+import handleError from '../../utils/handle-error';
 
 export const SET_TICKET_LIST = 'SET_TICKET_LIST';
 export const SET_LOADING_LIST = 'SET_LOADING_LIST';
@@ -55,11 +56,11 @@ export const fetchTicketList = (query?: {
       dispatch(setLoading(true));
       const result = await instance.get(ENDPOINT.ticketList());
       if (result.status !== 200) {
-        // handle error
+        handleError(result.data);
       }
       dispatch(setTicketList(result.data));
     } catch (error) {
-      // handle error
+      handleError(error);
     } finally {
       dispatch(setLoading(false));
     }
@@ -74,12 +75,12 @@ export const createNewTicket = (
       dispatch(setLoadingTicketItem(true));
       const result = await instance.post(ENDPOINT.ticketList(), ticket);
       if (result.status !== 201) {
-        // handle error
+        handleError(result.data);
       }
 
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setLoadingTicketItem(false));
@@ -98,14 +99,14 @@ export const assignTicket = (
         ENDPOINT.assignTicket(ticketId, userId)
       );
       if (result.status !== 204) {
-        // handle error
+        handleError(result.data);
       }
 
       dispatch(fetchTicketList());
 
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setLoadingTicketItem(false));
@@ -121,14 +122,14 @@ export const unassignTicket = (
       dispatch(setLoadingTicketItem(true));
       const result = await instance.put(ENDPOINT.unassignTicket(ticketId));
       if (result.status !== 204) {
-        // handle error
+        handleError(result.data);
       }
 
       dispatch(fetchTicketList());
 
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setLoadingTicketItem(false));
@@ -146,14 +147,14 @@ export const completeTicket = (
         ENDPOINT.updateCompleteTicket(ticketId)
       );
       if (result.status !== 204) {
-        // handle error
+        handleError(result.data);
       }
 
       dispatch(fetchTicketList());
 
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setGlobalLoading(false));
@@ -171,14 +172,14 @@ export const uncompleteTicket = (
         ENDPOINT.updateCompleteTicket(ticketId)
       );
       if (result.status !== 204) {
-        // handle error
+        handleError(result.data);
       }
 
       dispatch(fetchTicketList());
 
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setGlobalLoading(false));
@@ -194,12 +195,12 @@ export const getTicketDetail = (
       dispatch(setGlobalLoading(true));
       const result = await instance.get(ENDPOINT.ticketDetail(ticketId));
       if (result.status !== 204) {
-        // handle error
+        handleError(result.data);
       }
       dispatch(setTicketItem(result.data));
       return true;
     } catch (error) {
-      // handle error
+      handleError(error);
       return false;
     } finally {
       dispatch(setGlobalLoading(false));
