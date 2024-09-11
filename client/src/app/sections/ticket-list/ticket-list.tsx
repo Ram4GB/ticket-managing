@@ -3,11 +3,25 @@ import Heading from '../../components/heading/heading';
 import Tickets from '../../components/tickets/tickets';
 
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { useAppDispatch, useAppSelector } from '../../libs/store';
+import { useEffect } from 'react';
+import { fetchTicketList } from '../../store/ticket/actions';
+import { useNavigate } from 'react-router-dom';
 
 const TicketList = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const list = useAppSelector((state) => state.ticket.tickets);
+
   const handleChangeStatus = (value: string) => {
     console.log('value', value);
   };
+
+  useEffect(() => {
+    dispatch(fetchTicketList());
+  }, [dispatch]);
+
+  console.log('list', list);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -26,13 +40,18 @@ const TicketList = () => {
           />
         </div>
         <div style={{ marginLeft: 'auto' }}>
-          <Button size="large" type="primary" icon={<PlusCircleOutlined />}>
+          <Button
+            onClick={() => navigate('/ticket/new')}
+            size="large"
+            type="primary"
+            icon={<PlusCircleOutlined />}
+          >
             Add new ticket
           </Button>
         </div>
       </Flex>
       <Heading>Ticket list</Heading>
-      <Tickets tickets={[]} />
+      <Tickets tickets={list} />
     </div>
   );
 };

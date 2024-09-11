@@ -1,40 +1,51 @@
 import { Ticket } from '@acme/shared-models';
-
-const SET_TICKET_LIST = 'SET_TICKET_LIST';
-const FETCH_TICKET_LIST = 'FETCH_TICKET_LIST';
-
-interface SetTicketList {
-  type: typeof SET_TICKET_LIST;
-  payload: Ticket[];
-}
-
-interface FetchTicketList {
-  type: typeof FETCH_TICKET_LIST;
-  payload: {
-    status?: 'completed' | 'incomplete';
-    page: number;
-    limit: number;
-  };
-}
-
-type Action = SetTicketList | FetchTicketList;
+import {
+  Action,
+  SET_LOADING_LIST,
+  SET_LOADING_TICKET_ITEM,
+  SET_TICKET_LIST,
+} from './actions';
 
 interface InitialState {
   tickets: Ticket[];
-  page: number;
-  limit: number;
   status: 'all' | 'completed' | 'incomplete';
+  loading: boolean;
+  ticket: {
+    data: null;
+    loading: boolean;
+  };
 }
 
 const initialState: InitialState = {
   tickets: [],
-  page: 1,
-  limit: 10,
   status: 'all',
+  loading: false,
+  ticket: {
+    data: null,
+    loading: false,
+  },
 };
 
 const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
+    case SET_TICKET_LIST:
+      return {
+        ...state,
+        tickets: action.payload,
+      };
+    case SET_LOADING_LIST:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    case SET_LOADING_TICKET_ITEM:
+      return {
+        ...state,
+        ticket: {
+          ...state.ticket,
+          loading: action.payload,
+        },
+      };
     default:
       return state;
   }
