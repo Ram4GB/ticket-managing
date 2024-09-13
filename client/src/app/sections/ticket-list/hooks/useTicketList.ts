@@ -35,6 +35,10 @@ const useTicketList = () => {
     navigate('/ticket/new');
   };
 
+  const handleClickDetail = (ticket: Ticket) => {
+    navigate(`/ticket/${ticket.id}`);
+  };
+
   useEffect(() => {
     dispatch(fetchTicketList());
   }, [dispatch]);
@@ -119,6 +123,7 @@ const useTicketList = () => {
     handleCloseModal,
     handleCompleteTicket,
     handleUncompleteTicket,
+    handleClickDetail,
   };
 };
 

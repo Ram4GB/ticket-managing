@@ -1,9 +1,10 @@
 import { CloseOutlined, SendOutlined } from '@ant-design/icons';
-import { Button, Flex, Form, FormProps, Input, Select } from 'antd';
+import { Flex, Form, FormProps, Input, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserList } from '../../store/user/thunk';
 import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
+import AppButton from '../button/button';
 
 export enum FormType {
   'NEW' = 'NEW',
@@ -105,7 +106,7 @@ const TicketForm: FC<Props> = ({
         </Form.Item>
       )}
       <Flex gap={6} justify="space-between" className="mt-7">
-        <Button
+        <AppButton
           data-testid="cancel"
           icon={<CloseOutlined />}
           size="large"
@@ -115,9 +116,9 @@ const TicketForm: FC<Props> = ({
           style={{ width: hideSubmit ? '100%' : 'auto' }}
         >
           {type === FormType.DETAIL ? 'Back to home' : 'Cancel'}
-        </Button>
+        </AppButton>
         {!hideSubmit && (
-          <Button
+          <AppButton
             data-testid="btn-submit"
             icon={<SendOutlined />}
             size="large"
@@ -126,7 +127,7 @@ const TicketForm: FC<Props> = ({
             loading={loadinngTicketItem}
           >
             Submit
-          </Button>
+          </AppButton>
         )}
       </Flex>
     </Form>

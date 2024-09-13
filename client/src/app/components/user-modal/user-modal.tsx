@@ -1,8 +1,9 @@
-import { Button, Flex, Form, Modal, Select } from 'antd';
+import { Flex, Form, Modal, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import UserDescriptionWrapper from './user-description-wrapper';
 import { fetchUserList } from '../../store/user/thunk';
 import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
+import AppButton from '../button/button';
 
 interface Props {
   open: boolean;
@@ -54,22 +55,22 @@ const UserModal: FC<Props> = ({ open, onSubmit, onCancel }) => {
           />
         </Form.Item>
         <Flex justify="flex-end" gap={6}>
-          <Button
+          <AppButton
             disabled={loading}
             size="large"
             onClick={onCancel}
             type="default"
           >
             Cancel
-          </Button>
-          <Button
+          </AppButton>
+          <AppButton
             loading={loading}
             size="large"
             htmlType="submit"
             type="primary"
           >
             OK
-          </Button>
+          </AppButton>
         </Flex>
       </Form>
     </Modal>

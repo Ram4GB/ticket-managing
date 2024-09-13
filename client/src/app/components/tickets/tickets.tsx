@@ -6,11 +6,12 @@ import {
   UserDeleteOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Button, Flex, Popconfirm, Table, Tooltip } from 'antd';
+import { Flex, Popconfirm, Table, Tooltip } from 'antd';
 import { FC } from 'react';
-import Badge from '../badge/badge';
-import AppLink from '../link/link';
 import { Status } from '../../const/status';
+import Badge from '../badge/badge';
+import AppButton from '../button/button';
+import AppLink from '../link/link';
 
 export interface Props {
   loading?: boolean;
@@ -19,6 +20,7 @@ export interface Props {
   handleClickUnassign?: (ticket: Ticket) => void;
   handleClickComplete?: (ticket: Ticket) => void;
   handleClickUncomplete?: (ticket: Ticket) => void;
+  handleClickDetail?: (ticket: Ticket) => void;
 }
 
 const Tickets: FC<Props> = (props) => {
@@ -29,6 +31,7 @@ const Tickets: FC<Props> = (props) => {
     handleClickUnassign,
     handleClickComplete,
     handleClickUncomplete,
+    handleClickDetail,
   } = props;
 
   return (
@@ -41,6 +44,7 @@ const Tickets: FC<Props> = (props) => {
           title: 'ID',
           dataIndex: 'id',
           align: 'center',
+
           render(value) {
             return <AppLink to={`/ticket/${value}`}>#{value}</AppLink>;
           },
@@ -48,6 +52,7 @@ const Tickets: FC<Props> = (props) => {
         {
           title: 'Description',
           dataIndex: 'description',
+          width: '40%',
           render(value, row) {
             return <AppLink to={`/ticket/${row.id}`}>{value}</AppLink>;
           },
@@ -84,24 +89,24 @@ const Tickets: FC<Props> = (props) => {
                     description="Are you sure to un-assign this ticket?"
                     onConfirm={() => handleClickUnassign?.(row)}
                   >
-                    <Button
+                    <AppButton
                       type="dashed"
                       icon={<UserDeleteOutlined />}
                       danger={!!row.assigneeId}
                     >
                       Unassign
-                    </Button>
+                    </AppButton>
                   </Popconfirm>
                 ) : (
-                  <Button
+                  <AppButton
                     type="dashed"
                     icon={<UserAddOutlined />}
                     onClick={() => handleClickAssign?.(row)}
                   >
                     Assign
-                  </Button>
+                  </AppButton>
                 )}
-                <Button
+                <AppButton
                   icon={
                     row.completed ? <CloseOutlined /> : <CheckCircleOutlined />
                   }
@@ -114,7 +119,10 @@ const Tickets: FC<Props> = (props) => {
                   }
                 >
                   {row.completed ? Status.Incompleted : Status.Completed}
-                </Button>
+                </AppButton>
+                <AppButton type="text" onClick={() => handleClickDetail?.(row)}>
+                  Detail
+                </AppButton>
               </Flex>
             );
           },

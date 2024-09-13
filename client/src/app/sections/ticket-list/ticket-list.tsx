@@ -1,4 +1,4 @@
-import { Button, Flex } from 'antd';
+import { Flex } from 'antd';
 import Heading from '../../components/heading/heading';
 import Tickets from '../../components/tickets/tickets';
 
@@ -7,6 +7,7 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import UserModal from '../../components/user-modal/user-modal';
 import useTicketList from './hooks/useTicketList';
 import FilterStatus from '../../components/filter-status/filter-status';
+import AppButton from '../../components/button/button';
 
 const TicketList = () => {
   const {
@@ -22,6 +23,7 @@ const TicketList = () => {
     handleCompleteTicket,
     handleUncompleteTicket,
     handleChangeStatus,
+    handleClickDetail,
   } = useTicketList();
 
   return (
@@ -33,14 +35,14 @@ const TicketList = () => {
       >
         <FilterStatus value={filter.status} onChange={handleChangeStatus} />
         <div className="ml-0 md:ml-auto mt-2 md:mt-2">
-          <Button
+          <AppButton
             onClick={handleAddNewTicket}
             size="large"
             type="primary"
             icon={<PlusCircleOutlined />}
           >
             Add new ticket
-          </Button>
+          </AppButton>
         </div>
       </Flex>
       <Tickets
@@ -50,6 +52,7 @@ const TicketList = () => {
         handleClickUnassign={handleUnassign}
         handleClickComplete={handleCompleteTicket}
         handleClickUncomplete={handleUncompleteTicket}
+        handleClickDetail={handleClickDetail}
       />
       <UserModal
         open={Boolean(selectedTicket)}
