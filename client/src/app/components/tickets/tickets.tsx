@@ -10,6 +10,7 @@ import { Button, Flex, Popconfirm, Table, Tooltip } from 'antd';
 import { FC } from 'react';
 import Badge from '../badge/badge';
 import AppLink from '../link/link';
+import { Status } from '../../const/status';
 
 export interface Props {
   loading?: boolean;
@@ -115,7 +116,7 @@ const Tickets: FC<Props> = (props) => {
                       : () => handleClickComplete?.(row)
                   }
                 >
-                  {row.completed ? 'Uncomplete' : 'Complete'}
+                  {row.completed ? Status.Incompleted : Status.Completed}
                 </Button>
               </Flex>
             );
