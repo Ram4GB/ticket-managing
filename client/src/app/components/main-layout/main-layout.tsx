@@ -9,7 +9,7 @@ const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   } = theme.useToken();
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout className="min-h-screen">
       <Layout>
         <Content
           style={{

@@ -106,6 +106,7 @@ const TicketForm: FC<Props> = ({
       )}
       <Flex gap={6} justify="space-between" className="mt-7">
         <Button
+          data-testid="cancel"
           icon={<CloseOutlined />}
           size="large"
           type={type === FormType.DETAIL ? 'primary' : 'dashed'}
@@ -113,7 +114,7 @@ const TicketForm: FC<Props> = ({
           disabled={loadinngTicketItem}
           style={{ width: hideSubmit ? '100%' : 'auto' }}
         >
-          {type === FormType.DETAIL ? 'Back' : 'Cancel'}
+          {type === FormType.DETAIL ? 'Back to home' : 'Cancel'}
         </Button>
         {!hideSubmit && (
           <Button

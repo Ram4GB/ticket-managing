@@ -40,6 +40,13 @@ describe('Ticket form', () => {
     expect(btn).toBeInTheDocument();
   });
 
+  it('should show the `back to home` button when form mode is `FormType.DETAIL`', () => {
+    render(<MockRouter type={FormType.DETAIL} />);
+    const btnCancel = screen.getByTestId('cancel');
+    expect(btnCancel).toBeInTheDocument();
+    expect(btnCancel).toHaveTextContent('Back to home');
+  });
+
   it('should hide the submit button when setting `hideSubmit` to `true`', () => {
     render(<MockRouter hideSubmit />);
     const btn = screen.queryByTestId('btn-submit');
