@@ -25,16 +25,11 @@ const TicketList = () => {
   } = useTicketList();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div className="flex flex-col">
       <Heading>Ticket list</Heading>
-      <Flex
-        style={{ marginBottom: 20 }}
-        align="center"
-        justify="space-between"
-        wrap="wrap"
-      >
+      <Flex wrap="wrap" className="flex-col justify-start md:flex-row mb-4">
         <FilterStatus value={filter.status} onChange={handleChangeStatus} />
-        <div style={{ marginLeft: 'auto' }}>
+        <div className="ml-0 md:ml-auto mt-2 md:mt-2">
           <Button
             onClick={handleAddNewTicket}
             size="large"

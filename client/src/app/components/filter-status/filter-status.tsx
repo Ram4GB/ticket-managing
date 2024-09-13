@@ -14,7 +14,7 @@ const FilterStatus: FC<Props> = ({ value, onChange }) => {
     <Select
       value={value}
       size="large"
-      style={{ minWidth: '300px' }}
+      className="min-w-48"
       options={options}
       onChange={onChange}
     />

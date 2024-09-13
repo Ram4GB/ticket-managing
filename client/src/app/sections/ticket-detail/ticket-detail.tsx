@@ -31,7 +31,7 @@ const TicketDetail: FC = () => {
   return (
     <div>
       <Heading>Ticket detail</Heading>
-      <div style={{ maxWidth: 600, margin: 'auto' }}>
+      <div className="max-w-[600px] mx-auto">
         {ticket && (
           <TicketForm
             hideSubmit

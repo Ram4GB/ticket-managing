@@ -103,7 +103,7 @@ const TicketForm: FC<Props> = ({
           />
         </Form.Item>
       )}
-      <Flex gap={6} justify="space-between" style={{ marginTop: 32 }}>
+      <Flex gap={6} justify="space-between" className="mt-7">
         <Button
           icon={<CloseOutlined />}
           size="large"

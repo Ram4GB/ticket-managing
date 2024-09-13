@@ -42,7 +42,7 @@ const Tickets: FC<Props> = (props) => {
           dataIndex: 'id',
           align: 'center',
           render(value) {
-            return <AppLink to={`/ticket/${value}`}>{value}</AppLink>;
+            return <AppLink to={`/ticket/${value}`}>#{value}</AppLink>;
           },
         },
         {
@@ -77,7 +77,7 @@ const Tickets: FC<Props> = (props) => {
           title: 'Actions',
           render(_, row) {
             return (
-              <Flex gap={8}>
+              <Flex className="gap-2">
                 {row.assigneeId ? (
                   <Popconfirm
                     title="Unassign ticket"
@@ -87,7 +87,6 @@ const Tickets: FC<Props> = (props) => {
                     <Button
                       type="dashed"
                       icon={<UserDeleteOutlined />}
-                      style={{ minWidth: 120 }}
                       danger={!!row.assigneeId}
                     >
                       Unassign
@@ -97,14 +96,12 @@ const Tickets: FC<Props> = (props) => {
                   <Button
                     type="dashed"
                     icon={<UserAddOutlined />}
-                    style={{ minWidth: 120 }}
                     onClick={() => handleClickAssign?.(row)}
                   >
                     Assign
                   </Button>
                 )}
                 <Button
-                  style={{ minWidth: 160 }}
                   icon={
                     row.completed ? <CloseOutlined /> : <CheckCircleOutlined />
                   }

@@ -31,7 +31,7 @@ const UserModal: FC<Props> = ({ open, onSubmit, onCancel }) => {
     <Modal onCancel={onCancel} footer={null} open={open} title="Choose user">
       <UserDescriptionWrapper form={form} />
       <Form
-        style={{ marginTop: 20 }}
+        className="mt-5"
         form={form}
         initialValues={{ user: '' }}
         onFinish={onSubmit}

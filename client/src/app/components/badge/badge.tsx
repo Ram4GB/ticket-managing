@@ -21,7 +21,7 @@ const Badge: FC<Props> = ({ status }) => {
 
   return (
     <Tooltip title={text}>
-      <Tag style={{ textTransform: 'uppercase' }} color={colorTag}>
+      <Tag className="uppercase" color={colorTag}>
         {text}
       </Tag>
     </Tooltip>
