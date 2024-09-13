@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { Status } from '../../../const/status';
 import { useAppDispatch, useAppSelector } from '../../../libs/store';
 import {
-  assignTicket,
-  completeTicket,
   fetchTicketList,
+  assignTicket,
   unassignTicket,
+  completeTicket,
   uncompleteTicket,
-} from '../../../store/ticket/actions';
+} from '../../../store/ticket/thunk';
 
 const useTicketList = () => {
   const dispatch = useAppDispatch();

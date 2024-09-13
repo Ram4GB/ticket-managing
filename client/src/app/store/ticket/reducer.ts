@@ -1,11 +1,11 @@
 import { Ticket } from '@acme/shared-models';
 import {
-  Action,
+  SET_TICKET_LIST,
   SET_LOADING_LIST,
   SET_LOADING_TICKET_ITEM,
   SET_TICKET_ITEM,
-  SET_TICKET_LIST,
-} from './actions';
+  Action,
+} from './types';
 
 interface InitialState {
   tickets: Ticket[];

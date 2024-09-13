@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Heading from '../../components/heading/heading';
 import TicketForm, { FormType } from '../../components/ticket-form/ticket-form';
 import { useAppDispatch, useAppSelector } from '../../libs/store';
-import { getTicketDetail } from '../../store/ticket/actions';
+import { getTicketDetail } from '../../store/ticket/thunk';
 
 const TicketDetail: FC = () => {
   const dispatch = useAppDispatch();
