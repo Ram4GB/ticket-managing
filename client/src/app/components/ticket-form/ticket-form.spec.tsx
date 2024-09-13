@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from '../../libs/store';
-import TicketForm from './ticket-form';
+import TicketForm, { FormType } from './ticket-form';
 import { ComponentProps } from 'react';
 
 const MockRouter = (props: ComponentProps<typeof TicketForm>) => {
@@ -44,5 +44,23 @@ describe('Ticket form', () => {
     render(<MockRouter hideSubmit />);
     const btn = screen.queryByTestId('btn-submit');
     expect(btn).not.toBeInTheDocument();
+  });
+
+  it('should render `Assignee` & `Status` select component when setting type to different `NEW`', () => {
+    render(<MockRouter type={FormType.EDIT} />);
+    const frm = screen.getByTestId('form');
+    const usercomboBox = frm.querySelector('#user');
+    expect(usercomboBox).toBeInTheDocument();
+    const completecomboBox = frm.querySelector('#completed');
+    expect(completecomboBox).toBeInTheDocument();
+  });
+
+  it('should not render `Assignee` & `Status` select component when setting type to different `NEW`', () => {
+    render(<MockRouter type={FormType.NEW} />);
+    const frm = screen.getByTestId('form');
+    const usercomboBox = frm.querySelector('#user');
+    expect(usercomboBox).not.toBeInTheDocument();
+    const completecomboBox = frm.querySelector('#completed');
+    expect(completecomboBox).not.toBeInTheDocument();
   });
 });
