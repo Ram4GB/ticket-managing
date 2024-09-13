@@ -1,5 +1,5 @@
 import { User } from '@acme/shared-models';
-import { Action, SET_LOADING_LIST_USER, SET_USER_LIST } from './actions';
+import { Action, SET_LOADING_LIST_USER, SET_USER_LIST } from './types';
 
 interface InitialState {
   users: User[];

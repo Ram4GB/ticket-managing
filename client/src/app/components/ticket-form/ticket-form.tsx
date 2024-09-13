@@ -3,7 +3,7 @@ import { Button, Flex, Form, FormProps, Input, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../libs/store';
-import { fetchUserList } from '../../store/user/actions';
+import { fetchUserList } from '../../store/user/thunk';
 
 export enum FormType {
   'NEW' = 'NEW',

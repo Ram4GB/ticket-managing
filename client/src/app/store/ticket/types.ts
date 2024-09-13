@@ -1,9 +1,9 @@
 import { Ticket } from '@acme/shared-models';
 
-export const SET_TICKET_LIST = 'SET_TICKET_LIST';
-export const SET_LOADING_LIST = 'SET_LOADING_LIST';
-export const SET_LOADING_TICKET_ITEM = 'SET_LOADING_TICKET_ITEM';
-export const SET_TICKET_ITEM = 'SET_TICKET_ITEM';
+export const SET_TICKET_LIST = 'Ticket/SET_TICKET_LIST';
+export const SET_LOADING_LIST = 'Ticket/SET_LOADING_LIST';
+export const SET_LOADING_TICKET_ITEM = 'Ticket/SET_LOADING_TICKET_ITEM';
+export const SET_TICKET_ITEM = 'Ticket/SET_TICKET_ITEM';
 
 export interface SetTicketList {
   type: typeof SET_TICKET_LIST;

@@ -1,8 +1,8 @@
 import { Button, Flex, Form, Modal, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../libs/store';
-import { fetchUserList } from '../../store/user/actions';
 import UserDescriptionWrapper from './user-description-wrapper';
+import { fetchUserList } from '../../store/user/thunk';
 
 interface Props {
   open: boolean;
