@@ -5,5 +5,5 @@ export default styled.h1`
   margin-bottom: 10px;
   font-weight: bold;
   text-transform: uppercase;
-  color: #2e2e2e;
+  color: green;
 `;
