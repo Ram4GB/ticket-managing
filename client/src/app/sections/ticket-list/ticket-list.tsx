@@ -27,7 +27,10 @@ const TicketList = () => {
   return (
     <div className="flex flex-col">
       <Heading>Ticket list</Heading>
-      <Flex wrap="wrap" className="flex-col justify-start md:flex-row mb-4">
+      <Flex
+        wrap="wrap"
+        className="flex-col justify-start md:flex-row mb-4 items-center"
+      >
         <FilterStatus value={filter.status} onChange={handleChangeStatus} />
         <div className="ml-0 md:ml-auto mt-2 md:mt-2">
           <Button

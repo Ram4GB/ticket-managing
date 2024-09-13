@@ -2,7 +2,7 @@ import { Tag, Tooltip } from 'antd';
 import { FC } from 'react';
 
 interface Props {
-  completed: boolean;
+  completed?: boolean;
 }
 
 const Badge: FC<Props> = ({ completed }) => {
@@ -12,16 +12,16 @@ const Badge: FC<Props> = ({ completed }) => {
   let text;
 
   if (!completed) {
-    colorTag = '#f50';
+    colorTag = 'rgb(255, 85, 0)';
     text = 'Incomplete';
   } else {
-    colorTag = '#87d068';
+    colorTag = 'rgb(135,208,104)';
     text = 'Completed';
   }
 
   return (
-    <Tooltip data-testid="tool-tip" title={text}>
-      <Tag className="uppercase" color={colorTag}>
+    <Tooltip data-testid="tooltip" title={text}>
+      <Tag data-testid="tag" className="uppercase" color={colorTag}>
         {text}
       </Tag>
     </Tooltip>
