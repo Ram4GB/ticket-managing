@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUserList } from '../../store/user/thunk';
 import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
 import AppButton from '../button/button';
+import { useForm } from 'antd/es/form/Form';
 
 export enum FormType {
   'NEW' = 'NEW',
@@ -39,6 +40,8 @@ const TicketForm: FC<Props> = ({
   );
   const users = useAppSelector((state) => state.user.users);
 
+  const [form] = useForm();
+
   const handleCancel = () => {
     navigate('/');
   };
@@ -57,8 +60,16 @@ const TicketForm: FC<Props> = ({
     dispatch(fetchUserList());
   }, [dispatch]);
 
+  useEffect(() => {
+    form.setFieldValue('description', initialValues?.description);
+    console.log('initialValues?.completed', initialValues?.completed);
+    form.setFieldValue('completed', initialValues?.completed);
+    form.setFieldValue('user', initialValues?.user);
+  }, [initialValues, form]);
+
   return (
     <Form
+      form={form}
       data-testid="form"
       layout="vertical"
       initialValues={initialValues ? initialValues : { description: '' }}
@@ -74,7 +85,7 @@ const TicketForm: FC<Props> = ({
         <Input size="large" readOnly={type === FormType.DETAIL} />
       </Form.Item>
       {type !== FormType.NEW && (
-        <Form.Item label="Assignee" name="user">
+        <Form.Item label="Assignee" name="user" hidden={!initialValues?.user}>
           <Select
             showSearch
             disabled={type === FormType.DETAIL}

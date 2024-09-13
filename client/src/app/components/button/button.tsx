@@ -5,7 +5,7 @@ import { ComponentProps, FC } from 'react';
 interface Props extends ComponentProps<typeof Button> {}
 
 const AppButton: FC<Props> = (props) => {
-  return <Button {...props} className="min-w-32" />;
+  return <Button {...props} className="min-w-32" size="large" />;
 };
 
 export default AppButton;

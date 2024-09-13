@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Heading from '../../components/heading/heading';
 import TicketForm, { FormType } from '../../components/ticket-form/ticket-form';
@@ -10,6 +10,7 @@ const TicketDetail: FC = () => {
 
   const params = useParams<{ id: string }>();
   const ticket = useAppSelector((state) => state.ticket.ticket.data);
+  const loading = useAppSelector((state) => state.ticket.ticket.loading);
 
   useEffect(() => {
     if (!params.id) return;
@@ -17,22 +18,17 @@ const TicketDetail: FC = () => {
     dispatch(getTicketDetail(params.id));
   }, [dispatch, params.id]);
 
-  const initialValue = useMemo(
-    () => ({
-      description: ticket?.description ?? '',
-      user: Number(ticket?.assigneeId),
-      completed: ticket?.completed ?? false,
-    }),
-    [ticket]
-  );
-
-  console.log('initialValue', initialValue, ticket);
+  const initialValue = {
+    description: ticket?.description ?? '',
+    user: Number(ticket?.assigneeId),
+    completed: ticket?.completed ?? false,
+  };
 
   return (
     <div>
       <Heading>Ticket detail</Heading>
       <div className="max-w-[600px] mx-auto">
-        {ticket && (
+        {ticket && !loading && (
           <TicketForm
             hideSubmit
             type={FormType.DETAIL}
