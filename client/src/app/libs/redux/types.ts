@@ -4,41 +4,9 @@ import {
   useSelector,
   useStore,
 } from 'react-redux';
-import {
-  Action,
-  applyMiddleware,
-  combineReducers,
-  compose,
-  legacy_createStore,
-  UnknownAction,
-} from 'redux';
-import { thunk, ThunkDispatch } from 'redux-thunk';
-import {
-  MODULE_NAME as MODULE_TICKET,
-  default as ticketReducer,
-} from '../store/ticket/reducer';
-import {
-  MODULE_NAME as MODULE_USER,
-  default as userReducer,
-} from '../store/user/reducer';
-import {
-  MODULE_NAME as MODULE_GLOBAL,
-  default as globalReducer,
-} from '../store/global/reducer';
-
-const rootReducer = combineReducers({
-  [MODULE_TICKET]: ticketReducer,
-  [MODULE_USER]: userReducer,
-  [MODULE_GLOBAL]: globalReducer,
-});
-
-const composeEnhancers =
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = legacy_createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+import { Action, UnknownAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import store from './store';
 
 // Get the type of our store variable
 export type AppStore = typeof store;
@@ -69,5 +37,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   any,
   UnknownAction
 >;
-
-export default store;

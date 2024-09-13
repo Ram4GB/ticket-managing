@@ -3,7 +3,7 @@ import { notification } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import Heading from '../../components/heading/heading';
 import TicketForm from '../../components/ticket-form/ticket-form';
-import { useAppDispatch } from '../../libs/store';
+import { useAppDispatch } from '../../libs/redux/types';
 import { createNewTicket } from '../../store/ticket/thunk';
 
 const CreateTicket = () => {

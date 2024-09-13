@@ -3,7 +3,6 @@ import { notification } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Status } from '../../../const/status';
-import { useAppDispatch, useAppSelector } from '../../../libs/store';
 import {
   fetchTicketList,
   assignTicket,
@@ -17,6 +16,7 @@ import {
   inCompleteSuccess,
   unAssignSuccess,
 } from '../../../../app/const/message';
+import { useAppDispatch, useAppSelector } from '../../../libs/redux/types';
 
 const useTicketList = () => {
   const dispatch = useAppDispatch();

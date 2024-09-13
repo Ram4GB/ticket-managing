@@ -1,6 +1,6 @@
 import ENDPOINT from '../../const/endpoint';
 import instance from '../../libs/axios';
-import { AppThunk } from '../../libs/store';
+import { AppThunk } from '../../libs/redux/types';
 import handleError from '../../utils/handle-error';
 import { setLoading, setUserList } from './actions';
 

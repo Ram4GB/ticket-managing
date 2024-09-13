@@ -1,7 +1,7 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import { FC } from 'react';
-import { useAppSelector } from '../../libs/store';
+import { useAppSelector } from '../../libs/redux/types';
 
 const FullPageLoading: FC = () => {
   const loading = useAppSelector((state) => state.global.loading);

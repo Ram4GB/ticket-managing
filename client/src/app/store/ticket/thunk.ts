@@ -1,7 +1,6 @@
 import { Ticket } from '@acme/shared-models';
 import ENDPOINT from '../../const/endpoint';
 import instance from '../../libs/axios';
-import { AppThunk } from '../../libs/store';
 import handleError from '../../utils/handle-error';
 import { setGlobalLoading } from '../global/actions';
 import {
@@ -10,6 +9,7 @@ import {
   setLoadingTicketItem,
   setTicketItem,
 } from './actions';
+import { AppThunk } from '../../libs/redux/types';
 
 export const fetchTicketList = (query?: {
   page: number;

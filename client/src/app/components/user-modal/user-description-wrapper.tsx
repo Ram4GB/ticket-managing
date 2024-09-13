@@ -1,7 +1,7 @@
 import { Form, FormInstance } from 'antd';
 import { FC } from 'react';
 import UserDescription from '../user-description/user-description';
-import { useAppSelector } from '../../libs/store';
+import { useAppSelector } from '../../libs/redux/types';
 
 interface Props {
   form?: FormInstance<any>;

@@ -2,8 +2,8 @@ import { FC, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Heading from '../../components/heading/heading';
 import TicketForm, { FormType } from '../../components/ticket-form/ticket-form';
-import { useAppDispatch, useAppSelector } from '../../libs/store';
 import { getTicketDetail } from '../../store/ticket/thunk';
+import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
 
 const TicketDetail: FC = () => {
   const dispatch = useAppDispatch();

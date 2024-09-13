@@ -2,8 +2,8 @@ import { CloseOutlined, SendOutlined } from '@ant-design/icons';
 import { Button, Flex, Form, FormProps, Input, Select } from 'antd';
 import { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../libs/store';
 import { fetchUserList } from '../../store/user/thunk';
+import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
 
 export enum FormType {
   'NEW' = 'NEW',

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { ComponentProps } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from '../../libs/store';
+import store from '../../libs/redux/store';
 import TicketForm, { FormType } from './ticket-form';
 
 const MockRouter = (props: ComponentProps<typeof TicketForm>) => {

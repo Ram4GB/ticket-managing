@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './app/app';
-import store from './app/libs/store';
+import store from './app/libs/redux/store';
 import FullPageLoading from './app/components/fullpage-loading/fullpage-loading';
 
 const root = ReactDOM.createRoot(
