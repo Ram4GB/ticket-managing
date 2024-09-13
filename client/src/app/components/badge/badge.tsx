@@ -2,16 +2,16 @@ import { Tag, Tooltip } from 'antd';
 import { FC } from 'react';
 
 interface Props {
-  status: boolean;
+  completed: boolean;
 }
 
-const Badge: FC<Props> = ({ status }) => {
+const Badge: FC<Props> = ({ completed }) => {
   const DEFAULT_COLOR = 'gray';
   let colorTag = DEFAULT_COLOR;
 
   let text;
 
-  if (!status) {
+  if (!completed) {
     colorTag = '#f50';
     text = 'Incomplete';
   } else {
@@ -20,7 +20,7 @@ const Badge: FC<Props> = ({ status }) => {
   }
 
   return (
-    <Tooltip title={text}>
+    <Tooltip data-testid="tool-tip" title={text}>
       <Tag className="uppercase" color={colorTag}>
         {text}
       </Tag>

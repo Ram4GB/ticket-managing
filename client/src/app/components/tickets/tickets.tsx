@@ -70,7 +70,7 @@ const Tickets: FC<Props> = (props) => {
           dataIndex: 'completed',
           align: 'center',
           render(value) {
-            return <Badge status={value} />;
+            return <Badge completed={value} />;
           },
         },
         {
