@@ -58,6 +58,7 @@ const TicketForm: FC<Props> = ({
 
   return (
     <Form
+      data-testid="form"
       layout="vertical"
       initialValues={initialValues ? initialValues : { description: '' }}
       autoComplete="off"
@@ -116,6 +117,7 @@ const TicketForm: FC<Props> = ({
         </Button>
         {!hideSubmit && (
           <Button
+            data-testid="btn-submit"
             icon={<SendOutlined />}
             size="large"
             htmlType="submit"
