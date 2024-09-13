@@ -11,6 +11,12 @@ import {
   completeTicket,
   uncompleteTicket,
 } from '../../../store/ticket/thunk';
+import {
+  assignSuccess,
+  completeSuccess,
+  inCompleteSuccess,
+  unAssignSuccess,
+} from '../../../../app/const/message';
 
 const useTicketList = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +45,7 @@ const useTicketList = () => {
     dispatch(assignTicket(data.user, selectedTicket?.id)).then((success) => {
       if (success) {
         notification.success({
-          message: `Assign successfully`,
+          message: assignSuccess,
         });
         setSelectedTicket(undefined);
       }
@@ -50,7 +56,7 @@ const useTicketList = () => {
     return dispatch(unassignTicket(ticket?.id)).then((success) => {
       if (success) {
         notification.success({
-          message: `Unassign ticket successfully`,
+          message: unAssignSuccess,
         });
       }
     });
@@ -60,7 +66,7 @@ const useTicketList = () => {
     return dispatch(completeTicket(ticket?.id)).then((success) => {
       if (success) {
         notification.success({
-          message: `Complete ticket successfully`,
+          message: completeSuccess,
         });
       }
     });
@@ -70,7 +76,7 @@ const useTicketList = () => {
     return dispatch(uncompleteTicket(ticket?.id)).then((success) => {
       if (success) {
         notification.success({
-          message: `Uncomplete ticket successfully`,
+          message: inCompleteSuccess,
         });
       }
     });
