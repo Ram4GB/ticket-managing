@@ -17,7 +17,6 @@ import {
   MODULE_NAME as MODULE_GLOBAL,
   default as globalReducer,
 } from '../../store/global/reducer';
-import logger from '../../store/middlewares/logger';
 
 const rootReducer = combineReducers({
   [MODULE_TICKET]: ticketReducer,
@@ -30,7 +29,7 @@ const composeEnhancers =
 
 const store = legacy_createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk, logger))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;

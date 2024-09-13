@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { fetchUserList } from '../../store/user/thunk';
 import { useAppDispatch, useAppSelector } from '../../libs/redux/types';
 import AppButton from '../button/button';
-import { useForm } from 'antd/es/form/Form';
 
 export enum FormType {
   'NEW' = 'NEW',
@@ -40,7 +39,7 @@ const TicketForm: FC<Props> = ({
   );
   const users = useAppSelector((state) => state.user.users);
 
-  const [form] = useForm();
+  const [form] = Form.useForm();
 
   const handleCancel = () => {
     navigate('/');
@@ -62,7 +61,6 @@ const TicketForm: FC<Props> = ({
 
   useEffect(() => {
     form.setFieldValue('description', initialValues?.description);
-    console.log('initialValues?.completed', initialValues?.completed);
     form.setFieldValue('completed', initialValues?.completed);
     form.setFieldValue('user', initialValues?.user);
   }, [initialValues, form]);
