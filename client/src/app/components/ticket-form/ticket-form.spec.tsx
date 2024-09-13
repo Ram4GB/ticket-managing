@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { ComponentProps } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from '../../libs/store';
 import TicketForm, { FormType } from './ticket-form';
-import { ComponentProps } from 'react';
 
 const MockRouter = (props: ComponentProps<typeof TicketForm>) => {
   return (
